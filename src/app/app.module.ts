@@ -5,6 +5,7 @@ import {AccordionModule} from 'primeng/primeng';
 
 import {InputTextModule} from 'primeng/components/inputtext/inputtext';
 import {ButtonModule} from 'primeng/components/button/button';
+import { DataTableModule } from 'primeng/components/datatable/datatable';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {ButtonModule} from 'primeng/components/button/button';
     BrowserModule,
     ButtonModule,
     AccordionModule,
-    InputTextModule
+    InputTextModule,
+    DataTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

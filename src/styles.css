@@ -16,4 +16,18 @@ label{
   }
 }
 
+.col-valor{
+  width: 120px;
+  text-align: right;
+}
+
+.col-data{
+  width: 120px;
+  text-align: center;
+}
+
+.col-text{
+  text-align: center;
+}
+
 
