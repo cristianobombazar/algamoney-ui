@@ -25,8 +25,16 @@
       <p-dataTable [value]="lancamentos" [paginator]="true" [rows]="10" [responsive]="true">
         <p-column field="pessoa" header="Pessoa" styleClass="col-text"></p-column>
         <p-column field="descricao" header="Descrição" styleClass="col-text"></p-column>
-        <p-column field="dataVencimento" header="Vencimento" styleClass="col-data"></p-column>
-        <p-column field="dataPagamento" header="Pagamento" styleClass="col-data"></p-column>
+        <p-column field="dataVencimento" header="Vencimento" styleClass="col-data">
+          <ng-template let-lanc="rowData" pTemplate="body">
+            <span >{{lanc.dataVencimento | date:'dd/MM/yyy'}}</span>
+          </ng-template>
+        </p-column>
+        <p-column field="dataPagamento" header="Pagamento" styleClass="col-data">
+          <ng-template let-lanc="rowData" pTemplate="body">
+            <span >{{lanc.dataPagamento | date:'dd/MM/yyy'}}</span>
+          </ng-template>
+        </p-column>
         <p-column field="valor" header="Valor" styleClass="col-valor">
           <!--<ng-template pTemplate="body"> PODE SER "header" também-->
           <!--<button pButton label="teste"></button>-->
@@ -34,7 +42,7 @@
           <!--LET-LANC PODE SER QUALQUER NOME. O ROWDATA É OBRIGATÓRIO-->
           <ng-template let-lanc="rowData" pTemplate="body">
             <!--<span [style.color]="lanc.tipo === 'DESPESA' ? 'red' : 'blue'">{{lanc.valor}}</span> OUTRA FORMA DE FAZER O STYLE-->
-            <span [ngStyle]="{color: lanc.tipo === 'DESPESA' ? 'red' : 'blue'}">{{lanc.valor}}</span>
+            <span [ngStyle]="{color: lanc.tipo === 'DESPESA' ? 'red' : 'blue'}">{{lanc.valor | number:'1.2-2'}}</span>
           </ng-template>
         </p-column>
         <p-column styleClass="col-acoes">
