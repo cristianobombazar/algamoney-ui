@@ -34,12 +34,14 @@
 
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label>Categoria</label>
-        <input  pInputText type="text"/>
+        <!--AUTOWIDTH DIZ QUE VAI OCUPAR TODO O ESCPAÇO DA DIV.-->
+        <!--A VARAIVEL FILTER DIZ AO DROPDOWN SER RESPONSÁVEL PELO FILTRO-->
+        <p-dropdown [options]="categorias" [autoWidth]="false" placeholder="Selecione" [filter]="false" #categoria></p-dropdown>
       </div>
 
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label>Pessoa</label>
-        <input  pInputText type="text"/>
+        <p-dropdown [options]="pessoas" [autoWidth]="false" placeholder="Selecione" [filter]="true" #pessoa></p-dropdown>
       </div>
 
       <div class="ui-g-12 ui-fluid">
