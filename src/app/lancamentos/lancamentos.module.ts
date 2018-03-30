@@ -13,6 +13,7 @@ import {DataTableModule} from 'primeng/components/datatable/datatable';
 import {CalendarModule} from 'primeng/components/calendar/calendar';
 import {SelectButtonModule} from 'primeng/components/selectbutton/selectbutton';
 import {TooltipModule} from 'primeng/primeng';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import {TooltipModule} from 'primeng/primeng';
     SelectButtonModule,
     DropdownModule,
     CurrencyMaskModule,
+    SharedModule
   ],
   declarations: [
     LancamentoCadastroComponent,

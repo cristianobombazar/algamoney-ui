@@ -8,11 +8,8 @@ import {InputMaskModule} from 'primeng/components/inputmask/inputmask';
 import {DataTableModule} from 'primeng/components/datatable/datatable';
 import {TooltipModule} from 'primeng/components/tooltip/tooltip';
 import {InputTextModule} from 'primeng/components/inputtext/inputtext';
-import {InputTextareaModule} from 'primeng/components/inputtextarea/inputtextarea';
-import {DropdownModule} from 'primeng/components/dropdown/dropdown';
 import {ButtonModule} from 'primeng/components/button/button';
-import {CalendarModule} from 'primeng/components/calendar/calendar';
-import {SelectButtonModule} from 'primeng/components/selectbutton/selectbutton';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -22,7 +19,8 @@ import {SelectButtonModule} from 'primeng/components/selectbutton/selectbutton';
     ButtonModule,
     DataTableModule,
     TooltipModule,
-    InputMaskModule
+    InputMaskModule,
+    SharedModule
   ],
   declarations: [
     PessoaPesquisaComponent,
