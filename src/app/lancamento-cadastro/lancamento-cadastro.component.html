@@ -25,12 +25,11 @@
       <div class="ui-g-12 ui-md-9 ui-fluid">
         <label>Descrição {{descricao.errors | json}}</label>
         <input  pInputText type="text" name="descricao" ngModel #descricao="ngModel" required minlength="10"/>
-        <div class="ui-message ui-messages-error" *ngIf="descricao.hasError('required') && descricao.dirty">
-          Informe uma descrição
-        </div>
-        <div class="ui-message ui-messages-error" *ngIf="descricao.hasError('minlength') && descricao.dirty">
-          Informe um mínimo de {{descricao.errors.minlength.requiredLength}} caracteres
-        </div>
+
+        <app-message [control]="descricao" error="required" text="Informe uma descrição"></app-message>
+
+        <!--O ? QUER DIZER QUE SE O ERRORS TIVER NULO, ELE NÃO EXECUTA O RESTANTE DA INTERPOLAÇÃO-->
+        <app-message [control]="descricao" error="minlength" text="Informe um mínimo de {{descricao.errors?.minlength?.requiredLength}} caracteres"></app-message>
       </div>
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
