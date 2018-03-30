@@ -18,31 +18,23 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LancamentoCadastroComponent } from './lancamentos/lancamento-cadastro/lancamento-cadastro.component';
-import {PessoaPesquisaComponent} from './pessoa-pesquisa/pessoa-pesquisa.component';
+import {PessoaPesquisaComponent} from './pessoas/pessoa-pesquisa/pessoa-pesquisa.component';
 import { MessageComponent } from './message/message.component';
 import {LancamentosModule} from './lancamentos/lancamentos.module';
+import { PessoaGridComponent } from './pessoas/pessoa-grid/pessoa-grid.component';
+import {PessoasModule} from './pessoas/pessoas.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    PessoaPesquisaComponent,
     MessageComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule,
-    InputTextModule,
-    ButtonModule,
-    DataTableModule,
-    TooltipModule,
-    InputTextareaModule,
-    CalendarModule,
-    SelectButtonModule,
-    DropdownModule,
-    InputMaskModule,
-    LancamentosModule
+    LancamentosModule,
+    PessoasModule
   ],
   providers: [],
   bootstrap: [AppComponent]
