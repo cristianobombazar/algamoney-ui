@@ -12,6 +12,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { PessoaPesquisaComponent } from './pessoa-pesquisa/pessoa-pesquisa.component';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {CurrencyMaskModule} from 'ng2-currency-mask';
 
 
 
@@ -34,7 +35,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     CalendarModule,
     BrowserAnimationsModule,
     SelectButtonModule,
-    DropdownModule
+    DropdownModule,
+    CurrencyMaskModule
   ],
   providers: [],
   bootstrap: [AppComponent]
