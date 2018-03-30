@@ -13,6 +13,7 @@ import { PessoaPesquisaComponent } from './pessoa-pesquisa/pessoa-pesquisa.compo
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CurrencyMaskModule} from 'ng2-currency-mask';
+import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
 
 
 
@@ -22,7 +23,8 @@ import {CurrencyMaskModule} from 'ng2-currency-mask';
     LancamentosPesquisaComponent,
     NavbarComponent,
     PessoaPesquisaComponent,
-    LancamentoCadastroComponent
+    LancamentoCadastroComponent,
+    PessoaCadastroComponent
   ],
   imports: [
     BrowserModule,
