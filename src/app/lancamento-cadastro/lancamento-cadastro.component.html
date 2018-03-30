@@ -1,5 +1,5 @@
 <div class="container">
-  <form>
+  <form #f="ngForm" autocomplete="off">
 
     <div class="ui-g">
       <div class="ui-g-12">
@@ -7,46 +7,54 @@
       </div>
 
       <div class="ui-g-12">
-        <p-selectButton [options]="tipos" #tipo></p-selectButton>
+        <p-selectButton name="tipo" [options]="tipos" ngModel #tipo></p-selectButton>
       </div>
 
       <div class="ui-g-6 ui-md-3 ui-fluid">
         <label>Vencimento</label>
-        <!--<p-calendar dateFormat="dd/mm/yy" [inline]="true"></p-calendar> EXIBE O CALENDARIO NA PRPRIA LINHA, SEM SER NO POP UP-->
-        <p-calendar dateFormat="dd/mm/yy" [readonlyInput]="true" appLocalePtBr></p-calendar>
+        <p-calendar name="vencimento" dateFormat="dd/mm/yy"
+                    [inline]="false" [readonlyInput]="false" [showIcon]="false"
+                    ngModel #vencimento="ngModel" required></p-calendar>
+
+        <app-message [control]="vencimento" error="required"
+                     text="Informe uma data de vencimento"></app-message>
       </div>
 
       <div class="ui-g-6 ui-md-3 ui-fluid">
-        <!--TIPO É A VARIAVEL DE REFERENCIA PARA O CAMPO PSELECT BUTTON-->
-        <label>{{tipo.value === 'RECEITA' ? 'Recebimento' : 'Pagamento'}}</label>
-        <p-calendar></p-calendar>
+        <label>{{ tipo.value === 'RECEITA' ? 'Recebimento' : 'Pagamento' }}</label>
+        <p-calendar dateFormat="dd/mm/yy"></p-calendar>
       </div>
 
       <div class="ui-g-12 ui-md-9 ui-fluid">
-        <label>Descrição {{descricao.errors | json}}</label>
-        <input  pInputText type="text" name="descricao" ngModel #descricao="ngModel" required minlength="10"/>
+        <label>Descrição</label>
+        <input pInputText type="text" name="descricao"
+               ngModel #descricao="ngModel" required minlength="5">
 
-        <app-message [control]="descricao" error="required" text="Informe uma descrição"></app-message>
-
-        <!--O ? QUER DIZER QUE SE O ERRORS TIVER NULO, ELE NÃO EXECUTA O RESTANTE DA INTERPOLAÇÃO-->
-        <app-message [control]="descricao" error="minlength" text="Informe um mínimo de {{descricao.errors?.minlength?.requiredLength}} caracteres"></app-message>
+        <app-message [control]="descricao" error="required"
+                     text="Informe a descrição"></app-message>
+        <app-message [control]="descricao" error="minlength"
+                     text="Mínimo de {{ descricao.errors?.minlength?.requiredLength }} caracteres"></app-message>
       </div>
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label>Valor</label>
-        <input  pInputText currencyMask type="text" placeholder="0,00" [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative: 'false' }" name="valor" ngModel/>
+        <input pInputText type="text" name="valor" placeholder="0,00"
+               currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative: false }"
+               ngModel required>
       </div>
 
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label>Categoria</label>
-        <!--AUTOWIDTH DIZ QUE VAI OCUPAR TODO O ESCPAÇO DA DIV.-->
-        <!--A VARAIVEL FILTER DIZ AO DROPDOWN SER RESPONSÁVEL PELO FILTRO-->
-        <p-dropdown [options]="categorias" [autoWidth]="false" placeholder="Selecione" [filter]="false" #categoria></p-dropdown>
+        <p-dropdown name="categoria" [options]="categorias"
+                    placeholder="Selecione" [autoWidth]="false"
+                    ngModel required></p-dropdown>
       </div>
 
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label>Pessoa</label>
-        <p-dropdown [options]="pessoas" [autoWidth]="false" placeholder="Selecione" [filter]="true" #pessoa></p-dropdown>
+        <p-dropdown name="pessoa" [options]="pessoas" placeholder="Selecione"
+                    [autoWidth]="false" [filter]="true"
+                    ngModel required></p-dropdown>
       </div>
 
       <div class="ui-g-12 ui-fluid">
@@ -55,11 +63,11 @@
       </div>
 
       <div class="ui-g-12">
-        <button pButton type="submit" label="Salvar"></button>
+        <button pButton type="submit" label="Salvar" [disabled]="f.invalid"></button>
         <button pButton type="button" label="Novo" class="ui-button-info"></button>
-        <a href="javascript:;">Voltar Para a pesquisa</a>
+        <a href="javascript:;">Voltar para a pesquisa</a>
       </div>
-
     </div>
+
   </form>
 </div>
