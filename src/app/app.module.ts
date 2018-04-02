@@ -2,7 +2,7 @@ import { LancamentoService } from './lancamentos/lancamento.service';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 
 import {ToastyModule} from 'ng2-toasty';
 
@@ -31,7 +31,10 @@ import {ConfirmDialogModule, ConfirmationService,  SharedModule} from 'primeng/p
     LancamentosModule,
     PessoasModule
   ],
-  providers: [LancamentoService, PessoaService, ConfirmationService],
+  providers: [LancamentoService,
+              PessoaService,
+              ConfirmationService,
+              {provide: LOCALE_ID, useValue: 'pt-BR'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
