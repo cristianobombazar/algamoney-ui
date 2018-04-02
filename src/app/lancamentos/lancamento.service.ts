@@ -3,18 +3,27 @@ import { Injectable } from '@angular/core';
 
 import 'rxjs/add/operator/toPromise';
 
+export interface LancamentoFiltro {
+  descricao: string;
+}
+
+
 @Injectable()
 export class LancamentoService {
 
-  lancamentosUrl = 'http://localhost:8080/lancamentos';
+  lancamentosUrl = 'http://localhost:8080/lancamento';
 
   constructor(private http: Http) { }
 
-  pesquisar(): Promise<any> {
+  pesquisar(filtro: LancamentoFiltro): Promise<any> {
+    const params = new URLSearchParams();
     const headers = new Headers();
     headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
-    return this.http.get(`${this.lancamentosUrl}?resumo`, { headers })
+    if (filtro.descricao) {
+      params.set('descricao', filtro.descricao);
+    }
+    return this.http.get(`${this.lancamentosUrl}?resumo`, { headers, search : filtro })
       .toPromise()
       .then(response => response.json().content)
   }
