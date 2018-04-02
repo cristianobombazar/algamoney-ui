@@ -9,10 +9,10 @@ import {ToastyModule} from 'ng2-toasty';
 import { CoreModule } from './core/core.module';
 import { PessoasModule } from './pessoas/pessoas.module';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
-
 import {PessoaService} from './pessoas/pessoa.service';
-
 import { AppComponent } from './app.component';
+import {ConfirmDialogModule, ConfirmationService,  SharedModule} from 'primeng/primeng';
+
 
 @NgModule({
   declarations: [
@@ -24,12 +24,14 @@ import { AppComponent } from './app.component';
     HttpModule,
 
     ToastyModule.forRoot(),
+    ConfirmDialogModule,
+    SharedModule,
 
     CoreModule,
     LancamentosModule,
     PessoasModule
   ],
-  providers: [LancamentoService, PessoaService],
+  providers: [LancamentoService, PessoaService, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

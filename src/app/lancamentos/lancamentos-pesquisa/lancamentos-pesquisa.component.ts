@@ -2,6 +2,7 @@ import {LancamentoFiltro, LancamentoService} from './../lancamento.service';
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {LazyLoadEvent} from 'primeng/components/common/api';
 import {ToastyService} from 'ng2-toasty';
+import {ConfirmationService} from 'primeng/components/common/api';
 
 @Component({
   selector: 'app-lancamentos-pesquisa',
@@ -16,7 +17,8 @@ export class LancamentosPesquisaComponent implements OnInit {
   @ViewChild('tabela') grid;
 
   constructor(private lancamentoService: LancamentoService,
-              private toastyService: ToastyService) { }
+              private toastyService: ToastyService,
+              private confirmationService: ConfirmationService) { }
 
   ngOnInit() {
   }
@@ -35,21 +37,34 @@ export class LancamentosPesquisaComponent implements OnInit {
     this.pesquisar(pagina);
   }
 
+  confirmDialog(lancamento: any) {
+    this.confirmationService.confirm({
+      message: 'Deseja excluir o lançamento ' + lancamento.id + ' ?',
+      accept: () => {
+          this.excluir(lancamento);
+      },
+      reject: () => {
+
+      }
+    });
+  }
 
   excluir(lancamento: any) {
     this.lancamentoService.excluir(lancamento.id)
-                          .then( () => {
-                            if (this.grid.first === 0) {
-                              this.pesquisar();
-                            } else {
-                              this.grid.first = 0;
-                            }
-                            this.toastyService.success({
-                              title: 'Exclusão de registro',
-                              msg: 'Lancçamento ' + lancamento.id + ' excluído com sucesso!',
-                              showClose: true,
-                              timeout: 5000
-                            });
-                          });
+      .then( () => {
+        if (this.grid.first === 0) {
+          this.pesquisar();
+        } else {
+          this.grid.first = 0;
+        }
+        this.toastyService.success({
+          title: 'Exclusão de registro',
+          msg: 'Lancçamento ' + lancamento.id + ' excluído com sucesso!',
+          showClose: true,
+          timeout: 5000
+        });
+      });
+
+
   }
 }
