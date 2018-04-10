@@ -28,7 +28,7 @@ export class PessoaService {
     }
     return this.http.get(this.URI + '?', {headers, search : params})
                      .toPromise()
-                     .then( response =>{
+                     .then( response => {
                        const responseJson = response.json();
                        const pessoas  = responseJson.content;
                        const result = {
@@ -46,6 +46,14 @@ export class PessoaService {
     return this.http.get(this.URI + '?', {headers})
       .toPromise()
       .then( response => response.json().content);
+  }
+
+  excluir(codigo: number): Promise<void> {
+    const headers = new Headers();
+    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    return this.http.delete(this.URI + '/' + codigo, {headers})
+      .toPromise()
+      .then(() => null);
   }
 
 }
