@@ -69,6 +69,23 @@ export class PessoasPesquisaComponent implements OnInit{
       }).catch(error => this.errorHandlerService.handle(error));
   }
 
+  alterarStatus(pessoa: any) {
+    this.pessoaService.alterarStatus(pessoa)
+      .then( () => {
+        if (this.grid.first === 0) {
+          this.pesquisar();
+        } else {
+          this.grid.first = 0;
+        }
+        this.toastyService.success({
+          title: 'Alteração de Status',
+          msg: 'Pessoa ' + pessoa.nome + ' foi ' + (pessoa.ativo ? 'Inativada' : 'Ativada') + '  com sucesso!',
+          showClose: true,
+          timeout: 5000
+        });
+      }).catch(error => this.errorHandlerService.handle(error));
+  }
+
 
 
 }
