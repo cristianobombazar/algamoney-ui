@@ -3,6 +3,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {LazyLoadEvent} from 'primeng/components/common/api';
 import {ToastyService} from 'ng2-toasty';
 import {ConfirmationService} from 'primeng/components/common/api';
+import {ErrorHandlerService} from '../../core/error-handler.service';
 
 @Component({
   selector: 'app-lancamentos-pesquisa',
@@ -18,6 +19,7 @@ export class LancamentosPesquisaComponent implements OnInit {
 
   constructor(private lancamentoService: LancamentoService,
               private toastyService: ToastyService,
+              private errorHandlerServce: ErrorHandlerService,
               private confirmationService: ConfirmationService) { }
 
   ngOnInit() {
@@ -29,7 +31,7 @@ export class LancamentosPesquisaComponent implements OnInit {
                           .then(resultado => {
                                 this.totalRegistros = resultado.total;
                                 this.lancamentos = resultado.lancamentos;
-                          });
+                          }).catch(error => this.errorHandlerServce.handle(error));
   }
 
   onChangePage(event: LazyLoadEvent) {
@@ -63,8 +65,6 @@ export class LancamentosPesquisaComponent implements OnInit {
           showClose: true,
           timeout: 5000
         });
-      });
-
-
+      }).catch(error => this.errorHandlerServce.handle(error));
   }
 }
