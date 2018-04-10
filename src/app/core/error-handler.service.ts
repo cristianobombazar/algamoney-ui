@@ -19,7 +19,7 @@ export class ErrorHandlerService {
       msg = 'Ocorreu um erro ao processar a sua solicitação';
       try {
         errors = errorResponse.json();
-        msg = errors[0].mensagemUsuario;
+        msg = errors[0].messageUser;
       } catch (e) { }
       console.error('Ocorreu um erro', errorResponse);
     } else {
