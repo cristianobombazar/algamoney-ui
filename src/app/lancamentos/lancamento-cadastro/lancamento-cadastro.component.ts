@@ -21,9 +21,9 @@ export class LancamentoCadastroComponent implements OnInit {
   ];
 
   categorias = [];
-
   pessoas = [];
   lancamento = new Lancamento();
+  title = 'Novo '
 
   constructor(
     private categoriaService: CategoriaService,
@@ -37,8 +37,10 @@ export class LancamentoCadastroComponent implements OnInit {
   ngOnInit() {
     this.pesquisarCategorias();
     this.pesquisarPessoas();
-    if (this.route.snapshot.params['id']) {
+    const id = this.route.snapshot.params['id']
+    if (id) {
       this.find(this.route.snapshot.params['id']);
+      this.title = 'Editar ';
     }
   }
 

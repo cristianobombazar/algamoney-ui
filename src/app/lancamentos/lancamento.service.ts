@@ -91,12 +91,10 @@ export class LancamentoService {
 
   private converterStringsParaDatas(lancamentos: Lancamento[]) {
     for (const lancamento of lancamentos) {
-      lancamento.dataVencimento = moment(lancamento.dataVencimento,
-        'YYYY-MM-DD').toDate();
+      lancamento.dataVencimento = moment(lancamento.dataVencimento, 'YYYY-MM-DD').toDate();
 
       if (lancamento.dataPagamento) {
-        lancamento.dataPagamento = moment(lancamento.dataPagamento,
-          'YYYY-MM-DD').toDate();
+        lancamento.dataPagamento = moment(lancamento.dataPagamento, 'YYYY-MM-DD').toDate();
       }
     }
   }
