@@ -6,7 +6,7 @@ import {Lancamento} from '../../core/model';
 import {FormControl} from '@angular/forms';
 import {LancamentoService} from '../lancamento.service';
 import {ToastyService} from 'ng2-toasty';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -31,7 +31,8 @@ export class LancamentoCadastroComponent implements OnInit {
     private lancamentoService: LancamentoService,
     private toastyService: ToastyService,
     private errorHandler: ErrorHandlerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -76,10 +77,10 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   adicionarLancamento(form: FormControl) {
-    this.lancamentoService.adicionar(this.lancamento).then( () => {
+    this.lancamentoService.adicionar(this.lancamento).then( lancamento => {
       this.toastyService.success('Lançamento adicionado com sucesso!');
-      form.reset();
-      this.lancamento = new Lancamento();
+      this.router.navigate(['/lancamentos/', lancamento.id]);
+
     }).catch(error => this.errorHandler.handle(error));
   }
 
@@ -87,5 +88,13 @@ export class LancamentoCadastroComponent implements OnInit {
     this.lancamentoService.find(id).then( response => {
         this.lancamento = response;
     }).catch(erro => this.errorHandler.handle(erro));
+  }
+
+  novo(form: FormControl) {
+    form.reset();
+    setTimeout(function () {
+      this.lancamento = new Lancamento();
+    }.bind(this), 1); // bind this significa que o this é do cadastro component.
+    this.router.navigate(['/lancamentos/novo']);
   }
 }
