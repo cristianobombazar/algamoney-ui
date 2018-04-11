@@ -9,10 +9,12 @@ import { NavbarComponent } from './navbar/navbar.component';
 import {LancamentoService} from '../lancamentos/lancamento.service';
 import {PessoaService} from '../pessoas/pessoa.service';
 import {CategoriaService} from '../categoria/categoria.service';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
     ToastyModule.forRoot(),
     ConfirmDialogModule,
   ],
