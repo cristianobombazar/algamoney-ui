@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import {Headers, Http, URLSearchParams} from '@angular/http';
+import {Lancamento, Pessoa} from '../core/model';
 
 
 export class FiltroPessoa {
@@ -62,6 +63,14 @@ export class PessoaService {
     headers.append('Content-Type', 'application/json');
     return this.http.put(this.URI + '/' + pessoa.id + '/ativo', !pessoa.ativo, {headers}).toPromise()
       .then(() => null);
+  }
+
+  adicionar(pessoa: Pessoa): Promise<Pessoa> {
+    const headers = new Headers();
+    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.URI, JSON.stringify(pessoa), {headers}).toPromise().then( response => response.json());
+
   }
 
 }
