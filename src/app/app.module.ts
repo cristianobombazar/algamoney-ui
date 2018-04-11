@@ -7,8 +7,16 @@ import { CoreModule } from './core/core.module';
 import { PessoasModule } from './pessoas/pessoas.module';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { AppComponent } from './app.component';
-import { SharedModule} from 'primeng/primeng';
+import {RouterModule, Routes} from '@angular/router';
+import {LancamentosPesquisaComponent} from './lancamentos/lancamentos-pesquisa/lancamentos-pesquisa.component';
+import {LancamentoCadastroComponent} from './lancamentos/lancamento-cadastro/lancamento-cadastro.component';
+import {PessoasPesquisaComponent} from './pessoas/pessoas-pesquisa/pessoas-pesquisa.component';
 
+const routes: Routes = [
+  {path: 'lancamentos', component: LancamentosPesquisaComponent},
+  {path: 'lancamentos/novo', component: LancamentoCadastroComponent},
+  {path: 'pessoas', component: PessoasPesquisaComponent}
+];
 
 
 @NgModule({
@@ -19,9 +27,10 @@ import { SharedModule} from 'primeng/primeng';
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
+    RouterModule.forRoot(routes),
     CoreModule,
     LancamentosModule,
-    PessoasModule
+    PessoasModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
