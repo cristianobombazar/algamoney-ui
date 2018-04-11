@@ -6,6 +6,7 @@ import {Lancamento} from '../../core/model';
 import {FormControl} from '@angular/forms';
 import {LancamentoService} from '../lancamento.service';
 import {ToastyService} from 'ng2-toasty';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -30,6 +31,7 @@ export class LancamentoCadastroComponent implements OnInit {
     private lancamentoService: LancamentoService,
     private toastyService: ToastyService,
     private errorHandler: ErrorHandlerService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -45,7 +47,7 @@ export class LancamentoCadastroComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  pesquisarPessoas(){
+  pesquisarPessoas() {
     return this.pessoaService.listarTodas()
       .then(pessoas => {
         this.pessoas = pessoas.map(p => ({ label: p.nome, value: p.id }));
