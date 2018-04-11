@@ -37,6 +37,9 @@ export class LancamentoCadastroComponent implements OnInit {
   ngOnInit() {
     this.pesquisarCategorias();
     this.pesquisarPessoas();
+    if (this.route.snapshot.params['id']) {
+      this.find(this.route.snapshot.params['id']);
+    }
   }
 
   pesquisarCategorias() {
@@ -61,5 +64,11 @@ export class LancamentoCadastroComponent implements OnInit {
       form.reset();
       this.lancamento = new Lancamento();
     }).catch(error => this.errorHandler.handle(error));
+  }
+
+  find(id: number) {
+    this.lancamentoService.find(id).then( response => {
+        this.lancamento = response;
+    }).catch(erro => this.errorHandler.handle(erro));
   }
 }
