@@ -11,6 +11,7 @@ import {PessoaService} from '../pessoas/pessoa.service';
 import {CategoriaService} from '../categoria/categoria.service';
 import {RouterModule} from '@angular/router';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
+import {Title} from '@angular/platform-browser';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component'
     PessoaService,
     ConfirmationService,
     CategoriaService,
+    Title,
     {provide: LOCALE_ID, useValue: 'pt-BR'}
   ]
 })

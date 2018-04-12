@@ -7,6 +7,7 @@ import {FormControl} from '@angular/forms';
 import {LancamentoService} from '../lancamento.service';
 import {ToastyService} from 'ng2-toasty';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -32,7 +33,8 @@ export class LancamentoCadastroComponent implements OnInit {
     private toastyService: ToastyService,
     private errorHandler: ErrorHandlerService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private titlePage: Title
   ) { }
 
   ngOnInit() {
@@ -42,6 +44,8 @@ export class LancamentoCadastroComponent implements OnInit {
     if (id) {
       this.find(this.route.snapshot.params['id']);
       this.title = 'Editar ';
+    }else {
+      this.titlePage.setTitle('Novo Lançamento');
     }
   }
 
@@ -73,6 +77,7 @@ export class LancamentoCadastroComponent implements OnInit {
     this.lancamentoService.atualizar(this.lancamento).then( lancamento => {
       this.toastyService.success('Lançamento salvo com sucesso!');
       this.lancamento = lancamento;
+      this.titlePage.setTitle('Editar Lançamento ' + this.lancamento.descricao);
     }).catch(error => this.errorHandler.handle(error));
   }
 
@@ -87,6 +92,7 @@ export class LancamentoCadastroComponent implements OnInit {
   find(id: number) {
     this.lancamentoService.find(id).then( response => {
         this.lancamento = response;
+        this.titlePage.setTitle('Editar Lançamento ' + this.lancamento.descricao);
     }).catch(erro => this.errorHandler.handle(erro));
   }
 
