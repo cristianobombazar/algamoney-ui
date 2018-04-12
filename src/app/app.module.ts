@@ -17,10 +17,10 @@ import {AppRoutingModule} from './app-routing.module';
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
-    AppRoutingModule,
     CoreModule,
     LancamentosModule,
     PessoasModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
