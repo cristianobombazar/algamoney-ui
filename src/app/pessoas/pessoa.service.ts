@@ -73,4 +73,20 @@ export class PessoaService {
 
   }
 
+  atualizar(pessoa: Pessoa): Promise<Pessoa> {
+    const headers = new Headers();
+    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    headers.append('Content-Type', 'application/json');
+    return this.http.put(this.URI + '/'+pessoa.id , JSON.stringify(pessoa), {headers}).toPromise().then( response => response.json());
+
+  }
+
+  find(id: number): Promise<Pessoa> {
+    const headers = new Headers();
+    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    return this.http.get(this.URI + '/' + id, {headers}).toPromise().then(response => response.json());
+  }
+
+
+
 }
