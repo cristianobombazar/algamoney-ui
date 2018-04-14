@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
-import {Headers, Http} from '@angular/http';
+import { AuthHttp} from 'angular2-jwt';
 
 @Injectable()
 export class CategoriaService {
 
   URI = 'http://localhost:8080/categoria';
 
-  constructor(private http: Http) { }
+  constructor(private http: AuthHttp) { }
 
   listarTodas(): Promise<any> {
-    const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-    return this.http.get(this.URI, { headers })
+    return this.http.get(this.URI)
       .toPromise()
       .then(response => response.json());
   }

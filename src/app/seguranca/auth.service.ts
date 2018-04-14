@@ -39,7 +39,7 @@ export class AuthService {
 
   private armazenarToken(token: string) {
     this.jwtPayload = this.jwtHelper.decodeToken(token);
-    localStorage.setItem('token', token);
+    localStorage.setItem('token', token); //por padrão é token. Se mudar o nome, deve ser alterado no AuthConfig (SegurancaModule)
   }
 
   private carregarToken() {
