@@ -23,7 +23,8 @@ export class AuthService {
     headers.append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-    return this.http.post(this.oauthTokenURL, body, {headers}).toPromise().then( response => {
+    // withCredentials envia o cookia para não dar erro de CORS
+    return this.http.post(this.oauthTokenURL, body, {headers, withCredentials: true}).toPromise().then( response => {
       console.log(response);
       this.armazenarToken(response.json().access_token)
     }).catch(response => {
@@ -39,7 +40,7 @@ export class AuthService {
 
   private armazenarToken(token: string) {
     this.jwtPayload = this.jwtHelper.decodeToken(token);
-    localStorage.setItem('token', token); //por padrão é token. Se mudar o nome, deve ser alterado no AuthConfig (SegurancaModule)
+    localStorage.setItem('token', token); // por padrão é token. Se mudar o nome, deve ser alterado no AuthConfig (SegurancaModule)
   }
 
   private carregarToken() {
@@ -52,5 +53,29 @@ export class AuthService {
   temPermissao(permissao: string) {
     return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
   }
+
+  obterNovoAccessToken(): Promise<void> {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers.append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
+
+    const body = 'grant_type=refresh_token';
+
+    return this.http.post(this.oauthTokenURL, body,
+      { headers, withCredentials: true })
+      .toPromise()
+      .then(response => {
+        this.armazenarToken(response.json().access_token);
+
+        console.log('Novo access token criado!');
+
+        return Promise.resolve(null);
+      })
+      .catch(response => {
+        console.error('Erro ao renovar token.', response);
+        return Promise.resolve(null);
+      });
+  }
+
 
 }
