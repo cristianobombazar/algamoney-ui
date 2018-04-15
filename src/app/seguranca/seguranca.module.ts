@@ -9,6 +9,7 @@ import {Http, RequestOptions} from '@angular/http';
 import {MoneyHttp} from './money-http-';
 import {AuthService} from './auth.service';
 import {AuthGuard} from './auth.guard';
+import {LogoutService} from './logout.service';
 
 export function authHttpServiceFactory(authService: AuthService, http: Http, options: RequestOptions) {
   const headers = {globalHeaders: [{'Content-Type' : 'application/json'}]}
@@ -31,7 +32,8 @@ export function authHttpServiceFactory(authService: AuthService, http: Http, opt
      useFactory: authHttpServiceFactory,
      deps: [AuthService, Http, RequestOptions]
     },
-    AuthGuard
+    AuthGuard,
+    LogoutService
   ]
 })
 export class SegurancaModule { }
